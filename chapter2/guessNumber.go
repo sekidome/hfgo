@@ -13,8 +13,10 @@ import (
 
 func main() {
 	seconds := time.Now().Unix()
-	rand.Seed(seconds)
+	rand.Seed(seconds) // this "seeds" the random number generator. -> In go, u need to decide on the way u want to create the pseudorandom numbers.
 	ranNum := rand.Intn(100) + 1
+	fmt.Println("I've chosen a random number between 1 and 100. \n Can u guess it?")
+	success := false
 	for i := 1; i <= 10; i++ {
 		fmt.Print("Guess a number:")
 		reader := bufio.NewReader(os.Stdin)
@@ -34,7 +36,11 @@ func main() {
 			fmt.Println("Oops, you guessed to low", 10-i, "guesses left.")
 		} else {
 			fmt.Println("You guessed right on the", i, ". guess.")
+			success = true
 			break
 		}
+	}
+	if !success {
+		fmt.Println("Sorry, time is up. The number was", ranNum)
 	}
 }
