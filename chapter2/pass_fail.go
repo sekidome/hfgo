@@ -1,28 +1,20 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
+	keyboard "hfgo/chapter4"
 	"log"
-	"os"
-	"strconv"
-	"strings"
 )
 
 // this is a comment
 func main() {
 	fmt.Print("Enter a grade:")
-	reader := bufio.NewReader(os.Stdin) // reading loop
-	//fmt.Println(reader) --> This will keep on printing 0s
-	input, err := reader.ReadString('\n') // ReadString method requires an argument with a rune that marks the end of the input
 	var status string
+	grade, err := keyboard.GetFloat()
 	if err != nil {
 		log.Fatal(err)
 	}
-	input = strings.TrimSpace(input)
-	grade, err := strconv.ParseFloat(input, 64)
-	fmt.Println(grade)
-	if grade > 60 {
+	if grade >= 60 {
 		status = "passing"
 	} else {
 		status = "failing"
